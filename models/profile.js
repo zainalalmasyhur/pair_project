@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(this.User)
+      this.belongsTo(models.User)
     }
   }
   Profile.init({
