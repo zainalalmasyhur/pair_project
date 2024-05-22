@@ -1,0 +1,30 @@
+.main-container {
+    display: flex;
+    height: 100vh;
+}
+
+.container-left {
+    background-color: lightgrey;
+    width: 50%;
+    height: auto;
+}
+
+.container-right {
+    width: 50%;
+    padding: 40px 64px;
+}
+
+.container-right h2 {
+    margin: 32px 0;
+}
+
+.container-right .btn {
+    margin-top: 16px;
+    width: 100%;
+}
+
+.signup {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+}
