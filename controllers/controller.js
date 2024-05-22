@@ -36,13 +36,12 @@ class Controller {
 
     static async postUserSignup(req, res) {
         try {
-            let {UserId} = req.params;
-
-            let { username, email, password } = req.body;
-            await User.create({ username, email, password });
+            let { username, email, password, role } = req.body;
             
-            res.redirect(`user/${UserId}/`);
-            // res.send("Post user signup")
+            await User.create({ username, email, password, role });
+
+            res.redirect(`/login`);
+
         } catch (error) {
             res.send(error.message);
         }
@@ -53,10 +52,10 @@ class Controller {
         try {
             let { UserId } = req.params;
 
-            let user = await User.findAll();
-            res.send(user);
+            let user = await User.findByPk({where: { UserId: UserId}});
 
-            res.render("user/home-user", {title: "Home"});
+            // res.send(user)
+            res.render("user/home-user", {title: "Home", user});
 
         } catch (error) {
             res.send(error.message);
