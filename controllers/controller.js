@@ -1,13 +1,14 @@
 class Controller {
     // --- Landing Page
     static showLandingPage(req, res) {
-        res.send("Landing Page");
+        res.render("landing-page", {title: "SocialSync"});
     }
 
     // --- Log-In
     static async showFormLogin(req, res) {
         try {
-            res.send("Form Login");
+            res.render("login", {title: "Login Form"});
+
         } catch (error) {
             res.send(error.message);
         }
@@ -24,7 +25,8 @@ class Controller {
     // --- Sign-Up
     static async showFormSignup(req, res) {
         try {
-            res.send("Form Signup");
+            res.render("signup", {title: "Sign Up Form"})
+
         } catch (error) {
             res.send(error.message);
         }
