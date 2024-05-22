@@ -1,0 +1,23 @@
+[
+    {
+      "username": "john_doe",
+      "displayName": "John Doe",
+      "posts": 25,
+      "followers": 1000,
+      "following": 500,
+      "bio": "Penggemar fotografi dan petualang.",
+      "imgProfile": "https://example.com/john_doe_profile.jpg",
+      "UserId": 1
+    },
+    {
+      "username": "jane_smith",
+      "displayName": "Jane Smith",
+      "posts": 50,
+      "followers": 2000,
+      "following": 750,
+      "bio": "Desainer grafis dengan semangat seni.",
+      "imgProfile": "https://example.com/jane_smith_profile.jpg",
+      "UserId": 2
+    }
+  ]
+  

@@ -1,0 +1,73 @@
+[
+    {
+      "title": "Tips Mengembangkan Aplikasi Mobile",
+      "content": "Berikut adalah beberapa tips untuk mengembangkan aplikasi mobile yang sukses.",
+      "imgUrl": "https://example.com/mobile_app.jpg",
+      "TagId": 1,
+      "UserId": 1
+    },
+    {
+      "title": "Cara Merawat Tanaman Hias di Rumah",
+      "content": "Ingin tanaman hias Anda tetap sehat? Ikuti tips perawatan berikut ini.",
+      "imgUrl": "https://example.com/plants_care.jpg",
+      "TagId": 2,
+      "UserId": 2
+    },
+    {
+      "title": "Resep Masakan Sederhana: Nasi Goreng",
+      "content": "Berikut adalah resep nasi goreng yang mudah dan lezat untuk Anda coba di rumah.",
+      "imgUrl": "https://example.com/nasi_goreng.jpg",
+      "TagId": 3,
+      "UserId": 1
+    },
+    {
+      "title": "Tips Belajar Bahasa Asing dengan Cepat",
+      "content": "Ingin menguasai bahasa asing? Ikuti beberapa tips ini untuk belajar dengan efektif.",
+      "imgUrl": "https://example.com/language_learning.jpg",
+      "TagId": 4,
+      "UserId": 2
+    },
+    {
+      "title": "Inspirasi Desain Interior Ruang Tamu",
+      "content": "Temukan ide-ide kreatif untuk mendesain ruang tamu impian Anda.",
+      "imgUrl": "https://example.com/living_room_design.jpg",
+      "TagId": 5,
+      "UserId": 1
+    },
+    {
+      "title": "Tips Fotografi: Memotret Lanskap Alam",
+      "content": "Dapatkan hasil foto lanskap alam yang menakjubkan dengan tips-tips ini.",
+      "imgUrl": "https://example.com/landscape_photography.jpg",
+      "TagId": 6,
+      "UserId": 2
+    },
+    {
+      "title": "Manfaat Olahraga Bagi Kesehatan Mental",
+      "content": "Olahraga tidak hanya baik untuk fisik, tetapi juga membantu menjaga kesehatan mental.",
+      "imgUrl": "https://example.com/mental_health.jpg",
+      "TagId": 7,
+      "UserId": 1
+    },
+    {
+      "title": "Ide Kreatif untuk Hiasan Taman",
+      "content": "Hias taman Anda dengan ide-ide kreatif ini untuk menciptakan lingkungan yang indah.",
+      "imgUrl": "https://example.com/garden_decor.jpg",
+      "TagId": 8,
+      "UserId": 1
+    },
+    {
+      "title": "Panduan Belanja Pakaian Secara Pintar",
+      "content": "Temukan cara cerdas untuk berbelanja pakaian yang sesuai dengan gaya Anda.",
+      "imgUrl": "https://example.com/shopping_guide.jpg",
+      "TagId": 9,
+      "UserId": 2
+    },
+    {
+      "title": "Tips Membuat Kue Kering Lezat",
+      "content": "Ciptakan kue kering yang lezat dengan tips-tips praktis ini untuk acara spesial Anda.",
+      "imgUrl": "https://example.com/cookie_recipe.jpg",
+      "TagId": 10,
+      "UserId": 1
+    }
+  ]
+  
