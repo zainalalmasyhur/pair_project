@@ -54,7 +54,7 @@ class Controller {
             let { UserId } = req.params;
 
             let user = await User.findAll();
-            res.send(user);
+            // res.send(user);
 
             res.render("user/home-user", {title: "Home"});
 
