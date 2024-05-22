@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.hasMany(models.Post)
+      this.hasMany(models.Post_Tags)
     }
   }
   Tag.init({
