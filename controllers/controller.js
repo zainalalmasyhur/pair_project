@@ -1,3 +1,5 @@
+const { User, Tag, Profile, Post, Post_Tag } = require("../models/index");
+
 class Controller {
     // --- Landing Page
     static showLandingPage(req, res) {
@@ -34,7 +36,13 @@ class Controller {
 
     static async postUserSignup(req, res) {
         try {
-            res.send("Post user signup")
+            let {UserId} = req.params;
+
+            let { username, email, password } = req.body;
+            await User.create({ username, email, password });
+            
+            res.redirect(`user/${UserId}/`);
+            // res.send("Post user signup")
         } catch (error) {
             res.send(error.message);
         }
@@ -43,7 +51,13 @@ class Controller {
     // --- Home
     static async home(req, res) {
         try {
-            res.send("Beranda")
+            let { UserId } = req.params;
+
+            // let user = await User.findAll();
+            // res.send(user);
+
+            // res.render("user/home-user", {title: "Home"});
+
         } catch (error) {
             res.send(error.message);
         }
