@@ -1,4 +1,6 @@
+const { where } = require("sequelize");
 const { User, Tag, Profile, Post, Post_Tag } = require("../models/index");
+const bcrypt = require('bcryptjs');
 
 class Controller {
     // --- Landing Page
@@ -18,7 +20,29 @@ class Controller {
 
     static async postUserLogin(req, res) {
         try {
-            res.send("Post user login");
+            let {username,password} = req.body
+            let data = await User.findOne({
+                where:{
+                    email : username
+                }
+            })
+            
+            if (data) {
+                let passwordValidator = bcrypt.compareSync(password, data.password)
+
+                console.log(passwordValidator);
+                
+                if (passwordValidator) {
+                   return res.redirect(`/user`)
+                }else{
+                    let err = "invalid password"
+                   return res.redirect(`/login?err=${err}`)
+                }
+            } else {
+                let err = "invalid Username"
+               return res.redirect(`/login?err=${err}`)
+            }
+
         } catch (error) {
             res.send(error.message);
         }
