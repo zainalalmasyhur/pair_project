@@ -95,7 +95,7 @@
     margin-right: 18%;
     padding: 32px 56px;
     width: 78%;
-    height: auto;
+    height: 100%;
     background-color: #fafafa;
 }
 
@@ -158,6 +158,8 @@
 }
 
 .main-container .posts {
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr);
     margin-top: 40px;
 }
 
@@ -215,5 +217,13 @@
     margin-right: 4px;
 }
 
+
+.main-container .status {
+    display: flex;
+    flex-direction: column;
+    margin-top: 150px;
+    /* justify-content: center; */
+    text-align: center;
+}
 
 /* test */

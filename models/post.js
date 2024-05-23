@@ -26,5 +26,11 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Post',
   });
+
+  Post.beforeCreate(async (post, options) => {
+   post.likes = 0
+   post.comment = 0
+  });
+
   return Post;
 };

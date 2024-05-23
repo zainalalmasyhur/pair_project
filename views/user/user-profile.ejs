@@ -11,21 +11,21 @@
 <body>
     <aside class="sidebar">
         <div class="user-profile">
-            <img src="/assets/user-2.jpg" alt="">
-            <p class="display-name">Lorem ipsum</p>
-            <p class="username">@lorem_ipsum</p>
+            <img src="<%= dataUser.Profile.imgProfile %>" alt="">
+            <p class="display-name"><%= dataUser.Profile.displayName %></p>
+            <p class="username"><%= dataUser.username %></p>
         </div>
         <div class="statistics">
             <div class="posts">
-                <p class="amount">25</p>
+                <p class="amount"><%= dataUser.Profile.posts %></p>
                 <p class="status">POSTS</p>
             </div>
             <div class="followers">
-                <p class="amount">754</p>
+                <p class="amount"><%= dataUser.Profile.followers %></p>
                 <p class="status">FOLLOWERS</p>
             </div>
             <div class="following">
-                <p class="amount">327</p>
+                <p class="amount"><%= dataUser.Profile.following %></p>
                 <p class="status">FOLLOWING</p>
             </div>
         </div>
@@ -43,7 +43,7 @@
                 <i class='bx bx-plus-circle'></i>
                 <p>New Post</p>
             </a>
-            <a href="" class="log-out">
+            <a href="/logout" class="log-out">
                 <i class='bx bx-log-out'></i>
                 <p>Log Out</p>
             </a>
@@ -52,37 +52,47 @@
 
     <div class="main-container">
         <div class="profile-header">
-            <img src="/assets/user-2.jpg" alt="">
+            <img src="<%= dataUser.Profile.imgProfile %>" alt="">
             <div class="profile-info">
                 <div class="setting">
-                    <p class="display-name">Lorem ipsum</p>
+                    <p class="display-name"><%= dataUser.Profile.displayName %></p>
                     <a href="">
                         <i class='bx bx-cog'></i>    
                     </a>
                 </div>
-                <p class="username">@lorem_ipsum</p>
+                <p class="username"><%= dataUser.username %></p>
 
                 <div class="statistics">
-                    <p class="statistic-post">25 posts</p>
-                    <p class="statistic-follower">754 followers</p>
-                    <p class="statistic-follower">327 following</p>
+                    <p class="statistic-post"><%= dataUser.Profile.posts.length - 1 %> posts</p>
+                    <p class="statistic-follower"><%= dataUser.Profile.followers %> followers</p>
+                    <p class="statistic-follower"><%= dataUser.Profile.following %> following</p>
                 </div>
 
-                <p class="bio">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, odit?</p>
+                <p class="bio"><%= dataUser.Profile.bio %></p>
             </div>
         </div>
-        <div class="posts">
-            <a href="" data-bs-toggle="modal" data-bs-target="#PostId">
-                <img src="https://static01.nyt.com/images/2024/03/05/autossell/00TB-MEOWS/00TB-MEOWS-square640.jpg" alt="">
-            </a>
-            <img src="https://static01.nyt.com/images/2024/03/05/autossell/00TB-MEOWS/00TB-MEOWS-square640.jpg" alt="">
-            <img src="https://static01.nyt.com/images/2024/03/05/autossell/00TB-MEOWS/00TB-MEOWS-square640.jpg" alt="">
+        <% if (dataPosts.Posts.length === 0) { %>
+        <div class="status">
+            <h6>Capture your moments here</h6>
+            <a href="/user/<%= UserId %>/content/add">Create your first post</a>
         </div>
+        <% } else { %>
+            <% dataPosts.Posts.forEach(post => { %>
+            <div class="posts">
+                <a href="/user/<%= UserId %>/profile?content=<%= post.id %>" data-bs-toggle="modal" data-bs-target="#PostId">
+                    <img src="<%= post.imgUrl %>" alt="">
+                </a>
+                <div class="footer">
+                    <a type="button" href="/user/<%= UserId %>/content/delete/<%= post.id %>" class="btn btn-outline-danger" data-bs-dismiss="modal">Delete</a>
+                    <a type="button" href="/user/<%= UserId %>/content/edit/<%= post.id %>" class="btn btn-outline-warning">Edit</a>
+                </div>
+            <% })%>
+        <% } %>
     </div>
 
 
     <!-- MODAL -->
-    <div class="modal fade" id="PostId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="PostId" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -104,8 +114,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Delete</button>
-                    <button type="button" class="btn btn-outline-warning">Edit</button>
+                    <a type="button" href="/user/<%= UserId %>/content/delete/" class="btn btn-outline-danger" data-bs-dismiss="modal">Delete</a>
+                    <a type="button" class="btn btn-outline-warning">Edit</a>
                 </div>
             </div>
         </div>

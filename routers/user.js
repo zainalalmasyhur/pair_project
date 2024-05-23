@@ -4,6 +4,7 @@ const Controller = require("../controllers/controller");
 
 user.get("/:UserId/setting", Controller.formSetting);
 user.post("/:UserId/setting", Controller.postSetting);
+// user.get("/:UserId/setting/edit", Controller.formEditSe)
 user.get("/:UserId/home", Controller.home);
 user.get("/:UserId/profile", Controller.showUserProfile);
 user.get("/:UserId/content/add", Controller.formAddContent);
