@@ -100,7 +100,6 @@ class Controller {
             let { imgProfile, displayName, bio } = req.body;
             await Profile.create({ imgProfile, displayName, username, bio, UserId })
             // res.send(req.body)
-            // console.log(req.body)
             
             res.redirect(`/user/${UserId}/home`)
 
