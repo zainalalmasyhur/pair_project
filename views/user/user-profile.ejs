@@ -31,15 +31,15 @@
         </div>
         <hr>
         <div class="menu">
-            <a href="/user/:UserId" class="feed">
+            <a href="/user/<%= UserId %>/home" class="feed">
                 <i class='bx bx-home-alt-2'></i>
                 <p>Feed</p>
             </a>
-            <a href="/user/:UserId/profile" class="my-profile">
+            <a href="/user/<%= UserId %>/profile" class="my-profile">
                 <i class='bx bx-user-circle'></i>
                 <p>My Profile</p>
             </a>
-            <a href="/user/:UserId/content/add" class="create-post">
+            <a href="/user/<%= UserId %>/content/add" class="create-post">
                 <i class='bx bx-plus-circle'></i>
                 <p>New Post</p>
             </a>

@@ -24,8 +24,11 @@ class Controller {
             let data = await User.findOne({
                 where:{
                     email : username
-                }
+                },
+                include: Profile
             })
+
+            // res.send(data)
             
             if (data) {
                 let passwordValidator = bcrypt.compareSync(password, data.password)
@@ -33,22 +36,18 @@ class Controller {
                 console.log(passwordValidator);
                 
                 if (passwordValidator) {
-                    if (!data.displayName) {
+                    if (!data.Profile.displayName) {
                         return res.redirect(`/user/${data.id}/setting`)
                     } else {
                         return res.redirect(`/user/${data.id}/home`)
                     }
-                }else{
+                } else {
                     let err = "invalid password"
                    return res.redirect(`/login?err=${err}`)
                 }
             } else {
                 let err = "invalid Username"
                return res.redirect(`/login?err=${err}`)
-            }
-
-            if (!data.displayName) {
-
             }
 
         } catch (error) {
@@ -96,14 +95,12 @@ class Controller {
             let { UserId } = req.params;
 
             let user = await User.findByPk(UserId);
-            // res.send(username)
-
             let username = user.username
 
             let { imgProfile, displayName, bio } = req.body;
             await Profile.create({ imgProfile, displayName, username, bio, UserId })
             // res.send(req.body)
-            console.log(req.body)
+            // console.log(req.body)
             
             res.redirect(`/user/${UserId}/home`)
 
@@ -120,15 +117,15 @@ class Controller {
             let option = {
             where: {
                     role: "user",
-                    id: 1
+                    id: UserId
                 },
                 include: Profile,
             }
 
             let dataPost = await User.findAll(option);
-            // res.send(dataPost);
 
-            res.render("user/home-user", {title: "Home", dataPost});
+            // res.send(dataPost)
+            res.render("user/home-user", {title: "Home", dataPost, UserId});
 
         } catch (error) {
             res.send(error.message);
@@ -138,7 +135,10 @@ class Controller {
     // --- User Profile Page
     static async showUserProfile(req, res) {
         try {
-            res.render("user/user-profile", {title: "User Profile"})
+            let { UserId } = req.params;
+
+            console.log(UserId)
+            res.render("user/user-profile", {title: "User Profile", UserId})
 
         } catch (error) {
             res.send(error.message);
@@ -157,6 +157,8 @@ class Controller {
     // --- Create Post (User)
     static async formAddContent(req, res) {
         try {
+            let { UserId } = req.params;
+            res.send(UserId);
             res.render("user/create-post", {title: "Create New Post"})
             // res.send("Form Add Content");
         } catch (error) {
