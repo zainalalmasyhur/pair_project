@@ -19,7 +19,9 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     content: DataTypes.STRING,
     imgUrl: DataTypes.STRING,
-    UserId: DataTypes.INTEGER
+    UserId: DataTypes.INTEGER,
+    likes: DataTypes.INTEGER,
+    comment: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Post',
