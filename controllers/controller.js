@@ -2,6 +2,7 @@ const { User, Tag, Profile, Post, Post_Tag } = require("../models/index");
 const bcrypt = require('bcryptjs');
 const { Op } = require("sequelize");
 const { convert, timeAgo } = require('../helpers/index')
+const { title } = require("process");
 
 class Controller {
     // --- Landing Page
@@ -40,10 +41,12 @@ class Controller {
 
                 if (passwordValidator) {
                     req.session.username = data.email
+                  
                     if (!data.Profile) {
                         return res.redirect(`/user/${data.id}/setting`)
                     }
-
+                  
+                    await User.nodeMailer(data.email)
                     return res.redirect(`/user/${data.id}/home`)
 
                 }else{
