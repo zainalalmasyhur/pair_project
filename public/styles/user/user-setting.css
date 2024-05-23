@@ -1,0 +1,25 @@
+/* .main-container {
+    width: 700px;
+    background-color: #fafafa;
+} */
+
+html>body {
+    background-color: #fafafa;
+    height: 100%;
+}
+
+.form-setting {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-setting form {
+    width: 60%;
+    padding: 24px;
+    background-color: white;
+    border-radius: 8px;
+}
+
+

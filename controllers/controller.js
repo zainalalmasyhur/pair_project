@@ -33,7 +33,11 @@ class Controller {
                 console.log(passwordValidator);
                 
                 if (passwordValidator) {
-                   return res.redirect(`/user`)
+                    if (!data.displayName) {
+                        return res.redirect(`/user/${data.id}/setting`)
+                    } else {
+                        return res.redirect(`/user/${data.id}/home`)
+                    }
                 }else{
                     let err = "invalid password"
                    return res.redirect(`/login?err=${err}`)
@@ -41,6 +45,10 @@ class Controller {
             } else {
                 let err = "invalid Username"
                return res.redirect(`/login?err=${err}`)
+            }
+
+            if (!data.displayName) {
+
             }
 
         } catch (error) {
@@ -71,18 +79,51 @@ class Controller {
         }
     }
 
+    // --- Setting
+    static async formSetting(req, res) {
+        try {
+            let { UserId } = req.params;
+
+            res.render("user/user-setting", {title: "Setting", UserId});
+
+        } catch (error) {
+            res.send(error.message);
+        }
+    }
+
+    static async postSetting(req, res) {
+        try {
+            let { UserId } = req.params;
+
+            let user = await User.findByPk(UserId);
+            // res.send(username)
+
+            let username = user.username
+
+            let { imgProfile, displayName, bio } = req.body;
+            await Profile.create({ imgProfile, displayName, username, bio, UserId })
+            // res.send(req.body)
+            console.log(req.body)
+            
+            res.redirect(`/user/${UserId}/home`)
+
+        } catch (error) {
+            res.send(error.message);
+        }
+    }
+
     // --- Home
     static async home(req, res) {
         try {
+            let { UserId } = req.params;
+            
             let option = {
-                where: {
+            where: {
                     role: "user",
                     id: 1
                 },
                 include: Profile,
             }
-
-            let { UserId } = req.params;
 
             let dataPost = await User.findAll(option);
             // res.send(dataPost);
