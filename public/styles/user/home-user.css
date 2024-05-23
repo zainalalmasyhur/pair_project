@@ -1,0 +1,231 @@
+/* --- Sidebar */
+.sidebar {
+    position: fixed;
+    padding: 40px 32px;
+    width: 22%;
+    height: 100vh;
+    background-color: white;
+    border-right: 1.5px solid #f0f0f0;;
+}
+
+.sidebar .user-profile {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.sidebar .user-profile img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+.sidebar .user-profile p {
+    margin: 0;
+    width: fit-content;
+}
+
+.sidebar .user-profile .display-name {
+    margin-top: 8px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.sidebar .user-profile .username {
+    color: grey;
+}
+
+.sidebar .statistics {
+    margin: 32px 0 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sidebar .statistics .status {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgb(158, 158, 158);
+}
+
+.sidebar .statistics .amount {
+    text-align: center;
+    margin-bottom: 4px;
+    font-weight: 700;
+}
+
+.sidebar hr {
+    margin: 8px;
+}
+
+.sidebar .menu {
+    margin-top: 16px;
+}
+
+.sidebar .menu a {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    text-decoration: none;
+    color: grey;
+}
+
+.sidebar .menu p {
+    margin: 16px 0;
+    /* font-weight: 500; */
+}
+
+.sidebar .menu a:hover {
+    font-weight: 500;
+    color: rgb(255, 87, 115);
+}
+
+.sidebar .menu .bx {
+    font-size: 18px;
+}
+
+.sidebar .menu .log-out {
+    margin-top: 24px;
+}
+
+
+/* --- Navbar */
+.navbar-home {
+    margin-left: 22%;
+    display: flex;
+    align-items: center;
+    padding: 12px 56px;
+    background-color: white;
+    border-bottom: 1.5px solid #f0f0f0;
+}
+
+.navbar-home .d-flex .form-control {
+    background-color: #fafafa;
+    width: 300px;
+    border-radius: 8px 0 0 8px;
+}
+
+.navbar-home .d-flex button {
+    margin-left: 0;
+    /* width: 300px; */
+    border-radius: 0 8px 8px 0;
+}
+
+
+/* --- Main */
+.main-container {
+    margin-left: 22%;
+    margin-right: 18%;
+    padding: 32px 56px;
+    width: 78%;
+    height: auto;
+    background-color: #fafafa;
+}
+
+.main-container h4 {
+    margin-bottom: 24px;
+}
+
+
+/* --- Card */
+.main-container .card-post {
+    padding: 20px 24px;
+    width: 628px;
+    height: fit-content;
+    background-color: white;
+    border: 1.5px solid #f0f0f0;
+    border-radius: 8px;
+}
+
+.main-container .card-post .account-post {
+    display: flex;
+    margin-bottom: 16px;
+}
+
+.main-container .card-post .account-post p {
+    margin: 0 0 0 12px;
+    align-self: center;
+    font-weight: 500;
+}
+
+.main-container .card-post .account-post .timestamp {
+    color: rgb(173, 173, 173);
+    font-weight: 400;
+    margin-left: auto;
+}
+
+.main-container .card-post .account-post .account-img {
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.main-container .card-post .account-post .account-img img {
+    width: 200%;
+}
+
+.main-container .card-post img {
+    width: 580px;
+    height: 300px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.main-container .card-post .button {
+    display: flex;
+    margin: 16px 0;
+    gap: 32px;
+}
+
+.main-container .card-post .button .bx {
+    font-size: 24px;
+    margin-right: 8px;
+}
+
+.main-container .card-post .button p {
+    margin: 0;
+}
+
+.main-container .card-post .button .like {
+    display: flex;
+}
+
+.main-container .card-post .button .comment {
+    display: flex;
+}
+
+.main-container .card-post .caption p {
+    margin-bottom: 8px;
+}
+
+.main-container .card-post .tags a {
+    text-decoration: none;
+    color: rgb(0, 0, 144);
+    margin-right: 4px;
+}
+
+
+/* --- Right Sidebar */
+.sidebar-right {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 40px 32px;
+    width: 19%;
+    height: 100vh;
+    border-left: 1.5px solid #f0f0f0;
+    background-color: white;
+}
+
+.sidebar-right .popular-tags .tags {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar-right .popular-tags .tags a {
+    text-decoration: none;
+    color:#313638
+}

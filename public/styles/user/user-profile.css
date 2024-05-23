@@ -1,0 +1,219 @@
+/* --- Sidebar */
+.sidebar {
+    position: fixed;
+    padding: 40px 32px;
+    width: 22%;
+    height: 100vh;
+    background-color: white;
+    border-right: 1.5px solid #f0f0f0;;
+}
+
+.sidebar .user-profile {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.sidebar .user-profile img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+.sidebar .user-profile p {
+    margin: 0;
+    width: fit-content;
+}
+
+.sidebar .user-profile .display-name {
+    margin-top: 8px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.sidebar .user-profile .username {
+    color: grey;
+}
+
+.sidebar .statistics {
+    margin: 32px 0 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sidebar .statistics .status {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgb(158, 158, 158);
+}
+
+.sidebar .statistics .amount {
+    text-align: center;
+    margin-bottom: 4px;
+    font-weight: 700;
+}
+
+.sidebar hr {
+    margin: 8px;
+}
+
+.sidebar .menu {
+    margin-top: 16px;
+}
+
+.sidebar .menu a {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    text-decoration: none;
+    color: grey;
+}
+
+.sidebar .menu p {
+    margin: 16px 0;
+    /* font-weight: 500; */
+}
+
+.sidebar .menu a:hover {
+    font-weight: 500;
+    color: rgb(255, 87, 115);
+}
+
+.sidebar .menu .bx {
+    font-size: 18px;
+}
+
+.sidebar .menu .log-out {
+    margin-top: 24px;
+}
+
+
+/* --- Main */
+.main-container {
+    margin-left: 22%;
+    margin-right: 18%;
+    padding: 32px 56px;
+    width: 78%;
+    height: auto;
+    background-color: #fafafa;
+}
+
+.main-container h4 {
+    margin-bottom: 24px;
+}
+
+.main-container .profile-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.main-container .profile-header img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+.main-container .profile-header .profile-info {
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    margin: 0;
+}
+
+.main-container .profile-header .profile-info .setting {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.main-container .profile-header .profile-info .setting a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.main-container .profile-header .profile-info .setting .bx {
+    font-size: 20px;
+    color: grey;
+}
+
+.main-container .profile-header .profile-info .statistics{
+    margin: 8px 0;
+    display: flex;
+    gap: 16px;
+    font-weight: 500;
+}
+
+.main-container .profile-header .profile-info p {
+    margin: 0;
+}
+
+.main-container .profile-header .profile-info .display-name {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.main-container .posts {
+    margin-top: 40px;
+}
+
+.main-container .posts a {
+    text-decoration: none;
+}
+
+.main-container .posts img {
+    width: 282px;
+    height: 282px;
+    object-fit: cover;
+}
+
+
+/* --- Modal */
+.modal .modal-dialog .modal-content {
+    width: 451px;
+}
+
+.modal .modal-dialog .modal-header img {
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.modal .modal-dialog .modal-header .account-post {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal .modal-dialog .modal-header .account-post p {
+    margin: 0;
+    font-weight: 500;
+    margin-left: 8px;
+}
+
+.modal .modal-dialog .modal-body {
+    padding: 0;
+    /* display: flex; */
+}
+
+.modal .modal-dialog .modal-body img {
+    width: 450px;
+}
+
+.modal .modal-dialog .modal-body .post-caption {
+    padding: 16px;
+}
+
+.modal .modal-dialog .modal-body .post-caption a {
+    text-decoration: none;
+    color: rgb(0, 0, 144);
+    margin-right: 4px;
+}
+
+
+/* test */

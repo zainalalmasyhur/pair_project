@@ -60,13 +60,12 @@ class Controller {
 
     static async postUserSignup(req, res) {
         try {
-            let {UserId} = req.params;
-
-            let { username, email, password } = req.body;
-            await User.create({ username, email, password });
+            let { username, email, password, role } = req.body;
             
-            res.redirect(`user/${UserId}/`);
-            // res.send("Post user signup")
+            await User.create({ username, email, password, role });
+
+            res.redirect(`/login`);
+
         } catch (error) {
             res.send(error.message);
         }
@@ -75,12 +74,20 @@ class Controller {
     // --- Home
     static async home(req, res) {
         try {
+            let option = {
+                where: {
+                    role: "user",
+                    id: 1
+                },
+                include: Profile,
+            }
+
             let { UserId } = req.params;
 
-            let user = await User.findAll();
-            // res.send(user);
+            let dataPost = await User.findAll(option);
+            // res.send(dataPost);
 
-            res.render("user/home-user", {title: "Home"});
+            res.render("user/home-user", {title: "Home", dataPost});
 
         } catch (error) {
             res.send(error.message);
@@ -90,7 +97,8 @@ class Controller {
     // --- User Profile Page
     static async showUserProfile(req, res) {
         try {
-            res.send("Profile User")
+            res.render("user/user-profile", {title: "User Profile"})
+
         } catch (error) {
             res.send(error.message);
         }
@@ -108,7 +116,8 @@ class Controller {
     // --- Create Post (User)
     static async formAddContent(req, res) {
         try {
-            res.send("Form Add Content");
+            res.render("user/create-post", {title: "Create New Post"})
+            // res.send("Form Add Content");
         } catch (error) {
             res.send(error.message);
         }
