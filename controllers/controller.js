@@ -94,7 +94,6 @@ class Controller {
     static async formAddContent(req, res) {
         try {
             res.render("user/create-post", {title: "Create New Post"})
-            // res.send("Form Add Content");
         } catch (error) {
             res.send(error.message);
         }
