@@ -153,7 +153,7 @@ class Controller {
                         ]
                     }
                 ]
-            }
+            };
 
             // let optionPost = {
             //     where: {
