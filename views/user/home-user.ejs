@@ -17,15 +17,15 @@
         </div>
         <div class="statistics">
             <div class="posts">
-                <p class="amount">25</p>
+                <p class="amount"> <%= convert(25) %> </p>
                 <p class="status">POSTS</p>
             </div>
             <div class="followers">
-                <p class="amount">754</p>
+                <p class="amount"><%= convert(1300) %></p>
                 <p class="status">FOLLOWERS</p>
             </div>
             <div class="following">
-                <p class="amount">327</p>
+                <p class="amount"><%= convert(5000) %></p>
                 <p class="status">FOLLOWING</p>
             </div>
         </div>
@@ -43,7 +43,7 @@
                 <i class='bx bx-plus-circle'></i>
                 <p>New Post</p>
             </a>
-            <a href="" class="log-out">
+            <a href="/logout" class="log-out">
                 <i class='bx bx-log-out'></i>
                 <p>Log Out</p>
             </a>
@@ -80,7 +80,7 @@
             <div class="account-post">
                 <img class="account-img" src="<%= post.Profile.imgProfile %>" alt="">
                 <p><%= post.username %></p>
-                <p class="timestamp">3 days ago</p>
+                <p class="timestamp"> <%= timeAgo(post.createdAt) %> </p>
             </div>
             <img src="/assets/scenery-post.jpg" alt="...">
             <div class="button">

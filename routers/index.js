@@ -16,6 +16,17 @@ router.post("/login", Controller.postUserLogin);
 router.get("/signup", Controller.showFormSignup);
 router.post("/signup", Controller.postUserSignup);
 
+// --- Log-Out
+router.get("/logout", Controller.logOut);
+
+router.use(function (req,res,next){
+    if (!req.session.username) {
+        const err = 'tolong login terlebih dahulu'
+        res.redirect(`/login?error=${err}`)
+    } else {
+        next()
+    }
+})
 
 router.use("/admin", admin);
 router.use("/user", user);

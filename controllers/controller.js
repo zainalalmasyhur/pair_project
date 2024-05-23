@@ -1,6 +1,7 @@
 const { where } = require("sequelize");
 const { User, Tag, Profile, Post, Post_Tag } = require("../models/index");
 const bcrypt = require('bcryptjs');
+const { convert, timeAgo } = require('../helpers/index')
 
 class Controller {
     // --- Landing Page
@@ -26,14 +27,17 @@ class Controller {
                     email : username
                 }
             })
-            
+
             if (data) {
                 let passwordValidator = bcrypt.compareSync(password, data.password)
 
                 console.log(passwordValidator);
                 
                 if (passwordValidator) {
-                   return res.redirect(`/user`)
+
+                    req.session.username = data.email
+
+                   return res.redirect(`/user/${data.id}`)
                 }else{
                     let err = "invalid password"
                    return res.redirect(`/login?err=${err}`)
@@ -60,9 +64,9 @@ class Controller {
 
     static async postUserSignup(req, res) {
         try {
-            let { username, email, password, role } = req.body;
+            let { username, email, password} = req.body;
             
-            await User.create({ username, email, password, role });
+            await User.create({ username, email, password});
 
             res.redirect(`/login`);
 
@@ -87,7 +91,7 @@ class Controller {
             let dataPost = await User.findAll(option);
             // res.send(dataPost);
 
-            res.render("user/home-user", {title: "Home", dataPost});
+            res.render("user/home-user", {title: "Home", dataPost, convert, timeAgo});
 
         } catch (error) {
             res.send(error.message);
@@ -97,7 +101,7 @@ class Controller {
     // --- User Profile Page
     static async showUserProfile(req, res) {
         try {
-            res.render("user/user-profile", {title: "User Profile"})
+            res.render("user/user-profile", {title: "User Profile", convert})
 
         } catch (error) {
             res.send(error.message);
@@ -170,6 +174,16 @@ class Controller {
     static async deleteAccount(req, res) {
         try {
             res.send("Delete Account")
+        } catch (error) {
+            res.send(error.message);
+        }
+    }
+
+    // --- Log-Out
+    static async logOut(req, res){
+        try {
+            req.session.destroy()
+            res.redirect(`/login`)
         } catch (error) {
             res.send(error.message);
         }
