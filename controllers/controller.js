@@ -40,11 +40,12 @@ class Controller {
 
                 if (passwordValidator) {
                     req.session.username = data.email
-                    if (!data.Profile.displayName) {
+                    if (!data.Profile) {
                         return res.redirect(`/user/${data.id}/setting`)
-                    } else {
-                        return res.redirect(`/user/${data.id}/home`)
                     }
+
+                    return res.redirect(`/user/${data.id}/home`)
+
                 }else{
                     let err = "invalid password"
                    return res.redirect(`/login?err=${err}`)
@@ -140,6 +141,20 @@ class Controller {
                 include: Profile            
             }
 
+            let optionPosts = {
+                include: [
+                    {
+                        model: Post,
+                        include: [
+                            {
+                                model: Post_Tag,
+                                include: [Tag]
+                            }
+                        ]
+                    }
+                ]
+            }
+
             // let optionPost = {
             //     where: {
             //         id: {
@@ -149,14 +164,15 @@ class Controller {
             //     include: Post            
             // }
 
-            let post = await Post.findAll({include: User});
+            let postTags = await User.findAll(optionPosts);
+            // let postUser = await User.findAll({include})
             // let detailFeed = await User.findAll(optionPost)
             let feed = await User.findAll(optionFilter)
             let dataPost = await User.findAll(option);
 
-            // res.send(fseed)
+            res.send(postTags)
 
-            res.render("user/home-user", {title: "Home", dataPost, convert, timeAgo, UserId, feed, post});
+            res.render("user/home-user", {title: "Home", dataPost, convert, timeAgo, UserId, feed, postTags});
 
         } catch (error) {
             res.send(error.message);
