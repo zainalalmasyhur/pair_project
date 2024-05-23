@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/styles/login-signup.css">
+
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="user-profile">
+            <img src="/assets/user-2.jpg" alt="">
+            <p class="display-name">Lorem ipsum</p>
+            <p class="username">@lorem_ipsum</p>
+        </div>
+        <div class="statistics">
+            <div class="posts">
+                <p class="amount">25</p>
+                <p class="status">POSTS</p>
+            </div>
+            <div class="followers">
+                <p class="amount">754</p>
+                <p class="status">FOLLOWERS</p>
+            </div>
+            <div class="following">
+                <p class="amount">327</p>
+                <p class="status">FOLLOWING</p>
+            </div>
+        </div>
+        <hr>
+        <div class="menu">
+            <a href="/user/:UserId" class="feed">
+                <i class='bx bx-home-alt-2'></i>
+                <p>Feed</p>
+            </a>
+            <a href="/user/:UserId/profile" class="my-profile">
+                <i class='bx bx-user-circle'></i>
+                <p>My Profile</p>
+            </a>
+            <a href="/user/:UserId/content/add" class="create-post">
+                <i class='bx bx-plus-circle'></i>
+                <p>New Post</p>
+            </a>
+            <a href="" class="log-out">
+                <i class='bx bx-log-out'></i>
+                <p>Log Out</p>
+            </a>
+        </div>
+    </aside>
+    
+    <div class="main-container">
+        <div class="container-left"></div>
+        <div class="container-right">
+            <div class="back-button">
+                <a href="/">Back</a>
+            </div>
+            <h3>Welcome Back!</h3>
+            <form method="post" action="/login">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="text" class="form-control" id="email" name="email">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="email">
+                </div>
+                <button type="submit" class="btn btn-primary">Log In</button>
+            </form>
+            <div class="signup">
+                <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <%- include("../_bootstrap") %>
+</body>
+</html>

@@ -1,3 +1,4 @@
+const { where } = require("sequelize");
 const { User, Tag, Profile, Post, Post_Tag } = require("../models/index");
 
 class Controller {
@@ -50,12 +51,20 @@ class Controller {
     // --- Home
     static async home(req, res) {
         try {
+            let option = {
+                where: {
+                    role: "user",
+                    id: 1
+                },
+                include: Profile,
+            }
+
             let { UserId } = req.params;
 
-            let user = await User.findByPk({where: { UserId: UserId}});
+            let dataPost = await User.findAll(option);
+            // res.send(dataPost);
 
-            // res.send(user)
-            res.render("user/home-user", {title: "Home", user});
+            res.render("user/home-user", {title: "Home", dataPost});
 
         } catch (error) {
             res.send(error.message);
@@ -65,7 +74,8 @@ class Controller {
     // --- User Profile Page
     static async showUserProfile(req, res) {
         try {
-            res.send("Profile User")
+            res.render("user/user-profile", {title: "User Profile"})
+
         } catch (error) {
             res.send(error.message);
         }
@@ -83,7 +93,8 @@ class Controller {
     // --- Create Post (User)
     static async formAddContent(req, res) {
         try {
-            res.send("Form Add Content");
+            res.render("user/create-post", {title: "Create New Post"})
+            // res.send("Form Add Content");
         } catch (error) {
             res.send(error.message);
         }

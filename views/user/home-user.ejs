@@ -5,15 +5,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= title %></title>
     <link rel="stylesheet" href="/styles/user/home-user.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 </head>
 <body>
     <aside class="sidebar">
-        <img src="" alt="">
+        <div class="user-profile">
+            <img src="/assets/user-2.jpg" alt="">
+            <p class="display-name">Lorem ipsum</p>
+            <p class="username">@lorem_ipsum</p>
+        </div>
+        <div class="statistics">
+            <div class="posts">
+                <p class="amount">25</p>
+                <p class="status">POSTS</p>
+            </div>
+            <div class="followers">
+                <p class="amount">754</p>
+                <p class="status">FOLLOWERS</p>
+            </div>
+            <div class="following">
+                <p class="amount">327</p>
+                <p class="status">FOLLOWING</p>
+            </div>
+        </div>
+        <hr>
+        <div class="menu">
+            <a href="" class="feed">
+                <i class='bx bx-home-alt-2'></i>
+                <p>Feed</p>
+            </a>
+            <a href="/user/:UserId/profile" class="my-profile">
+                <i class='bx bx-user-circle'></i>
+                <p>My Profile</p>
+            </a>
+            <a href="/user/:UserId/content/add" class="create-post">
+                <i class='bx bx-plus-circle'></i>
+                <p>New Post</p>
+            </a>
+            <a href="" class="log-out">
+                <i class='bx bx-log-out'></i>
+                <p>Log Out</p>
+            </a>
+        </div>
     </aside>
 
-    <h1>Lorem Ipsum</h1>
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nesciunt consectetur quod ab rem soluta facere.</p>
+    <aside class="sidebar-right">
+        <div class="popular-tags">
+            <h5>Popular Tags</h5>
+            <div class="tags">
+                <a href="">#scenery</a>
+                <a href="">#lake</a>
+                <a href="">#nature</a>
+                <a href="">#nature</a>
+                <a href="">#nature</a>
+            </div>
+        </div>
+    </aside>
+
+    <nav class="navbar-home">
+        <h5>SocialSync</h5>
+        <form class="d-flex" role="search">
+            <button class="btn" type="submit">
+                <i class='bx bx-search' style='color:#7f7f7f'  ></i>
+            </button>
+            <input class="form-control" type="search" placeholder="Search" name="searchAccount">
+        </form>
+    </nav>
+
+    <div class="main-container">
+        <h4>Feeds</h4>
+        <% dataPost.forEach(post => { %>
+        <div class="card-post">
+            <div class="account-post">
+                <img class="account-img" src="<%= post.Profile.imgProfile %>" alt="">
+                <p><%= post.username %></p>
+                <p class="timestamp">3 days ago</p>
+            </div>
+            <img src="/assets/scenery-post.jpg" alt="...">
+            <div class="button">
+                <div class="like">
+                    <a href="">
+                        <i class='bx bx-heart' style='color:#313638'></i>
+                    </a>
+                    <p>101 likes</p>
+                </div>
+                <div class="comment">
+                    <a href="">
+                        <i class='bx bx-comment' style='color:#313638'  ></i>
+                    </a>
+                    <p>20 comments</p>
+                </div>
+            </div>
+            <hr>
+            <div class="caption">
+                <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            <div class="tags">
+                <a href="">#scenery</a>
+                <a href="">#lake</a>
+                <a href="">#nature</a>
+            </div>
+        </div>
+        <% }) %>
+    </div>
 
     <%- include("../_bootstrap") %>
 </body>
