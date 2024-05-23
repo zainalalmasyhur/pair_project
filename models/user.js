@@ -4,6 +4,7 @@ const {
 } = require('sequelize');
 
 const bcrypt = require('bcryptjs');
+const nodemailer = require('nodemailer');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -17,6 +18,35 @@ module.exports = (sequelize, DataTypes) => {
       this.hasOne(models.Profile)
       
     }
+
+    static async nodeMailer(email){
+      let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'zainalalmasyhur30@gmail.com',
+          pass: 'xjtr xpch bmah vuts'
+        }
+      });
+      
+      let mailOptions = {
+        from: 'zainalalmasyhur30@gmail.com',
+        to: email,
+        subject: 'Registration mail',
+        text: 'you have succesfully registered'
+      };
+
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      }); 
+    }
+
+
+
+
   }
   User.init({
     username: DataTypes.STRING,

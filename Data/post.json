@@ -5,7 +5,7 @@
       "imgUrl": "https://example.com/mobile_app.jpg",
       "UserId": 1,
       "likes":20,
-      "comment":"gambarnya bagus banget"
+      "comment":2
     },
     {
       "title": "Cara Merawat Tanaman Hias di Rumah",
@@ -13,7 +13,7 @@
       "imgUrl": "https://example.com/plants_care.jpg",
       "UserId": 2,
       "likes":20,
-      "comment":"gambarnya bagus banget"
+      "comment":2
     },
     {
       "title": "Resep Masakan Sederhana: Nasi Goreng",
@@ -21,7 +21,7 @@
       "imgUrl": "https://example.com/nasi_goreng.jpg",
       "UserId": 1,
       "likes":20,
-      "comment":"gambarnya bagus banget"
+      "comment":2
     },
     {
       "title": "Tips Belajar Bahasa Asing dengan Cepat",
@@ -29,7 +29,7 @@
       "imgUrl": "https://example.com/language_learning.jpg",
       "UserId": 2,
       "likes":20,
-      "comment":"gambarnya bagus banget"
+      "comment":2
     },
     {
       "title": "Inspirasi Desain Interior Ruang Tamu",
@@ -37,7 +37,7 @@
       "imgUrl": "https://example.com/living_room_design.jpg",
       "UserId": 1,
       "likes":20,
-      "comment":"gambarnya bagus banget"
+      "comment":2
     },
     {
       "title": "Tips Fotografi: Memotret Lanskap Alam",
@@ -45,7 +45,7 @@
       "imgUrl": "https://example.com/landscape_photography.jpg",
       "UserId": 2,
       "likes":20,
-      "comment":"gambarnya bagus banget"
+      "comment":2
     },
     {
       "title": "Manfaat Olahraga Bagi Kesehatan Mental",
@@ -53,7 +53,7 @@
       "imgUrl": "https://example.com/mental_health.jpg",
       "UserId": 1,
       "likes":20,
-      "comment":"gambarnya bagus banget"
+      "comment":2
     },
     {
       "title": "Ide Kreatif untuk Hiasan Taman",
@@ -61,7 +61,7 @@
       "imgUrl": "https://example.com/garden_decor.jpg",
       "UserId": 1,
       "likes":20,
-      "comment":"gambarnya bagus banget"
+      "comment":2
     },
     {
       "title": "Panduan Belanja Pakaian Secara Pintar",
@@ -69,7 +69,7 @@
       "imgUrl": "https://example.com/shopping_guide.jpg",
       "UserId": 2,
       "likes":20,
-      "comment":"gambarnya bagus banget"
+      "comment":2
     },
     {
       "title": "Tips Membuat Kue Kering Lezat",
@@ -77,7 +77,7 @@
       "imgUrl": "https://example.com/cookie_recipe.jpg",
       "UserId": 1,
       "likes":20,
-      "comment":"gambarnya bagus banget"
+      "comment":2
     }
   ]
   

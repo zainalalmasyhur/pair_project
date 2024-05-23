@@ -1,7 +1,11 @@
 const { where } = require("sequelize");
 const { User, Tag, Profile, Post, Post_Tag } = require("../models/index");
 const bcrypt = require('bcryptjs');
-const { convert, timeAgo } = require('../helpers/index')
+const { convert } = require('../helpers/index');
+const { title } = require("process");
+const { Op } = require("sequelize");
+
+
 
 class Controller {
     // --- Landing Page
@@ -32,10 +36,14 @@ class Controller {
                 let passwordValidator = bcrypt.compareSync(password, data.password)
 
                 // console.log(passwordValidator);
+               if (data.role === 'admin') {
+                return res.redirect(`/admin`)
+               }
                 
                 if (passwordValidator) {
                     req.session.username = data.email
                     if (!data.displayName) {
+                        await User.nodeMailer(data.email)
                         return res.redirect(`/user/${data.id}/setting`)
                     } else {
                         return res.redirect(`/user/${data.id}/home`)
@@ -130,7 +138,7 @@ class Controller {
             let dataPost = await User.findAll(option);
             // res.send(dataPost);
 
-            res.render("user/home-user", {title: "Home", dataPost, convert, timeAgo});
+            res.render("user/home-user", {title: "Home", dataPost, convert});
 
         } catch (error) {
             res.send(error.message);
@@ -203,7 +211,30 @@ class Controller {
     // --- Admin Page
     static async showAdminPage(req, res) {
         try {
-            res.send("Halaman Admin");
+
+            let {search} = req.query
+
+            let option = {
+                include: Profile,
+                where: {
+                    role: 'user'
+                }
+            }
+
+            if (search) {
+                option.where.username = {
+                    [Op.iLike]: `%${search}%`
+                }
+            }
+
+            console.log(option);
+
+            let data = await User.findAll(option)
+
+            // res.send(data)
+
+            // res.send(data)
+            res.render("admin/home-admin",{title: "admin page",data,convert});
         } catch (error) {
             res.send(error.message);
         }
@@ -212,7 +243,15 @@ class Controller {
     // --- Delete User Account (Admin)
     static async deleteAccount(req, res) {
         try {
-            res.send("Delete Account")
+            let {id} = req.params
+
+            await Profile.destroy({
+                where: {
+                    id: id
+                }
+            })
+
+            res.redirect('/admin')
         } catch (error) {
             res.send(error.message);
         }
