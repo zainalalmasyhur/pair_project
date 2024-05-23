@@ -27,10 +27,14 @@ class Controller {
         try {
             let {username,password} = req.body
             let data = await User.findOne({
+                include: Profile,
                 where:{
                     email : username
                 }
             })
+
+            // console.log(data);
+            // res.send(data)
 
             if (data) {
                 let passwordValidator = bcrypt.compareSync(password, data.password)
@@ -42,7 +46,7 @@ class Controller {
                 
                 if (passwordValidator) {
                     req.session.username = data.email
-                    if (!data.displayName) {
+                    if (!data.Profile.displayName) {
                         await User.nodeMailer(data.email)
                         return res.redirect(`/user/${data.id}/setting`)
                     } else {
