@@ -130,6 +130,7 @@
 /* --- Card */
 .main-container .card-post {
     padding: 20px 24px;
+    margin-bottom: 24px;
     width: 628px;
     height: fit-content;
     background-color: white;

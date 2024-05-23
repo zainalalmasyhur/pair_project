@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/styles/user/create-content.css">
+
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="user-profile">
+            <img src="<%= dataUser.Profile.imgProfile %>" alt="">
+            <p class="display-name"><%= dataUser.Profile.displayName %></p>
+            <p class="username"><%= dataUser.username %></p>
+        </div>
+        <div class="statistics">
+            <div class="posts">
+                <p class="amount"><%= dataUser.Profile.posts %></p>
+                <p class="status">POSTS</p>
+            </div>
+            <div class="followers">
+                <p class="amount"><%= dataUser.Profile.followers %></p>
+                <p class="status">FOLLOWERS</p>
+            </div>
+            <div class="following">
+                <p class="amount"><%= dataUser.Profile.following %></p>
+                <p class="status">FOLLOWING</p>
+            </div>
+        </div>
+        <hr>
+        <div class="menu">
+            <a href="/user/<%= UserId %>/home" class="feed">
+                <i class='bx bx-home-alt-2'></i>
+                <p>Feed</p>
+            </a>
+            <a href="/user/<%= UserId %>/profile" class="my-profile">
+                <i class='bx bx-user-circle'></i>
+                <p>My Profile</p>
+            </a>
+            <a href="/user/<%= UserId %>/content/add" class="create-post">
+                <i class='bx bx-plus-circle'></i>
+                <p>New Post</p>
+            </a>
+            <a href="/logout" class="log-out">
+                <i class='bx bx-log-out'></i>
+                <p>Log Out</p>
+            </a>
+        </div>
+    </aside>
+
+    <div class="main-container">
+        <div class="container-left"></div>
+        <div class="container-right">
+            <h3 class="mb-4">Create Post</h3>
+            <form method="post" action="/user/<%= UserId %>/content/edit/<%= PostId %>">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" value="<%= dataPost.title %>">
+                </div>
+                <div class="mb-3">
+                    <label for="content" class="form-label">Content</label>
+                    <textarea class="form-control" id="content" rows="3" name="content"><%= dataPost.content %></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="imgUrl" class="form-label">Image URL</label>
+                    <input type="text" class="form-control" id="imgUrl" name="imgUrl" value="<%= dataPost.imgUrl %>">
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-3">Publish</button>
+            </form>
+        </div>
+    </div>
+
+    <%- include("../_bootstrap") %>
+</body>
+</html>

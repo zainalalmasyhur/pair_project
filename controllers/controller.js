@@ -1,6 +1,6 @@
-const { where } = require("sequelize");
 const { User, Tag, Profile, Post, Post_Tag } = require("../models/index");
 const bcrypt = require('bcryptjs');
+const { Op, where } = require("sequelize");
 const { convert, timeAgo } = require('../helpers/index')
 
 class Controller {
@@ -12,7 +12,9 @@ class Controller {
     // --- Log-In
     static async showFormLogin(req, res) {
         try {
-            res.render("login", {title: "Login Form"});
+            let { err } = req.query;
+
+            res.render("login", {title: "Login Form", err});
 
         } catch (error) {
             res.send(error.message);
@@ -23,6 +25,7 @@ class Controller {
         try {
             let {username,password} = req.body
             let data = await User.findOne({
+                include: Profile,
                 where:{
                     email : username
                 }
@@ -31,11 +34,9 @@ class Controller {
             if (data) {
                 let passwordValidator = bcrypt.compareSync(password, data.password)
 
-                // console.log(passwordValidator);
-                
                 if (passwordValidator) {
                     req.session.username = data.email
-                    if (!data.displayName) {
+                    if (!data.Profile.displayName) {
                         return res.redirect(`/user/${data.id}/setting`)
                     } else {
                         return res.redirect(`/user/${data.id}/home`)
@@ -45,12 +46,8 @@ class Controller {
                    return res.redirect(`/login?err=${err}`)
                 }
             } else {
-                let err = "invalid Username"
+                let err = "invalid Email Address"
                return res.redirect(`/login?err=${err}`)
-            }
-
-            if (!data.displayName) {
-
             }
 
         } catch (error) {
@@ -61,7 +58,9 @@ class Controller {
     // --- Sign-Up
     static async showFormSignup(req, res) {
         try {
-            res.render("signup", {title: "Sign Up Form"})
+            let { err } = req.query;
+
+            res.render("signup", {title: "Sign Up Form", err})
 
         } catch (error) {
             res.send(error.message);
@@ -77,7 +76,12 @@ class Controller {
             res.redirect(`/login`);
 
         } catch (error) {
-            res.send(error.message);
+            if (error.name === "SequelizeValidationError") {
+                let errors = error.errors.map(err => err.message);
+                res.redirect(`/signup?err=${errors}`)
+            } else {
+                res.send(error.message);
+            }
         }
     }
 
@@ -98,15 +102,11 @@ class Controller {
             let { UserId } = req.params;
 
             let user = await User.findByPk(UserId);
-            // res.send(username)
-
             let username = user.username
 
             let { imgProfile, displayName, bio } = req.body;
+
             await Profile.create({ imgProfile, displayName, username, bio, UserId })
-            // res.send(req.body)
-            console.log(req.body)
-            
             res.redirect(`/user/${UserId}/home`)
 
         } catch (error) {
@@ -122,15 +122,37 @@ class Controller {
             let option = {
             where: {
                     role: "user",
-                    id: 1
+                    id: UserId
                 },
                 include: Profile,
             }
 
-            let dataPost = await User.findAll(option);
-            // res.send(dataPost);
+            let optionFilter = {
+                where: {
+                    id: {
+                        [Op.ne]: UserId
+                    },
+                },
+                include: Profile            
+            }
 
-            res.render("user/home-user", {title: "Home", dataPost, convert, timeAgo});
+            // let optionPost = {
+            //     where: {
+            //         id: {
+            //             [Op.ne]: UserId
+            //         },
+            //     },
+            //     include: Post            
+            // }
+
+            let post = await Post.findAll({include: User});
+            // let detailFeed = await User.findAll(optionPost)
+            let feed = await User.findAll(optionFilter)
+            let dataPost = await User.findAll(option);
+
+            // res.send(fseed)
+
+            res.render("user/home-user", {title: "Home", dataPost, convert, timeAgo, UserId, feed, post});
 
         } catch (error) {
             res.send(error.message);
@@ -140,7 +162,12 @@ class Controller {
     // --- User Profile Page
     static async showUserProfile(req, res) {
         try {
-            res.render("user/user-profile", {title: "User Profile", convert})
+            let { UserId } = req.params;
+
+            let dataUser = await User.findByPk(UserId, {include: Profile});
+            let dataPosts = await User.findOne({where: {id: UserId}, include: Post});
+
+            res.render("user/user-profile", {title: "User Profile", convert, UserId, dataUser, dataPosts})
 
         } catch (error) {
             res.send(error.message);
@@ -159,8 +186,11 @@ class Controller {
     // --- Create Post (User)
     static async formAddContent(req, res) {
         try {
-            res.render("user/create-post", {title: "Create New Post"})
-            // res.send("Form Add Content");
+            let { UserId, PostId } = req.params;
+            
+            let dataUser = await User.findByPk(UserId, {include: Profile});
+            res.render("user/create-post", {title: "Create New Post", UserId, dataUser})
+
         } catch (error) {
             res.send(error.message);
         }
@@ -168,7 +198,12 @@ class Controller {
 
     static async postNewContent(req, res) {
         try {
-            res.send("Post New Content")
+            let { UserId } = req.params;
+            let { title, content, imgUrl } = req.body;
+
+            await Post.create({ title, content, imgUrl, UserId, likes:0 });
+            res.redirect(`/user/${UserId}/profile`);
+
         } catch (error) {
             res.send(error.message);
         }
@@ -177,7 +212,12 @@ class Controller {
     // --- Update Post (User)
     static async formEditContent(req, res) {
         try {
-            res.send("Form Edit Content")
+            let { UserId, PostId } = req.params;
+            
+            let dataUser = await User.findByPk(UserId, {include: Profile});
+            let dataPost = await Post.findByPk(PostId);
+            res.render("user/form-edit-content", {title: "Form Edit Post", UserId, PostId, dataPost, dataUser});
+
         } catch (error) {
             res.send(error.message);
         }
@@ -185,7 +225,12 @@ class Controller {
 
     static async postEditedContent(req, res) {
         try {
-            res.send("Post Edited Content")
+            let { UserId, PostId } = req.params;
+            let { title, content, imgUrl } = req.body;
+
+            await Post.update({ title, content, imgUrl }, { where: {id: PostId} });
+            res.redirect(`/user/${UserId}/profile`)
+
         } catch (error) {
             res.send(error.message);
         }
@@ -194,7 +239,12 @@ class Controller {
     // --- Delete Post (User)
     static async deleteContent(req, res) {
         try {
-            res.send("Delete Content")
+            let { UserId, PostId } = req.params;
+            
+            // console.log(req.query)
+            await Post_Tags.destroy({where: {PostId: PostId}});
+            res.redirect(`user/${UserId}/profile`)
+            // res.send("Delete Content")
         } catch (error) {
             res.send(error.message);
         }

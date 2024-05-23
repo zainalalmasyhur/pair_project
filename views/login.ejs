@@ -26,6 +26,11 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Log In</button>
             </form>
+            <% if (err) { %>
+                <div class="alert alert-danger mt-4" role="alert">
+                    <%= err %>
+                </div>
+            <% } %>
             <div class="signup">
                 <p>Don't have an account? <a href="/signup">Sign Up</a></p>
             </div>

@@ -11,21 +11,24 @@
 <body>
     <aside class="sidebar">
         <div class="user-profile">
-            <img src="<%= dataPost.Profile.imgProfile %>" alt="">
-            <p class="display-name">Lorem ipsum</p>
-            <p class="username">@lorem_ipsum</p>
+            <img src="<%= dataPost[0].Profile.imgProfile %>" alt="">
+            <p class="display-name"><%= dataPost[0].Profile.displayName %></p>
+            <p class="username"><%= dataPost[0].username %></p>
         </div>
         <div class="statistics">
             <div class="posts">
-                <p class="amount"> <%= convert(25) %> </p>
+                <% let totalPosts = dataPost[0].Profile.posts %>
+                <p class="amount"> <%= convert(totalPosts) %> </p>
                 <p class="status">POSTS</p>
             </div>
             <div class="followers">
-                <p class="amount"><%= convert(1300) %></p>
+                <% let totalFollowers = dataPost[0].Profile.followers %>
+                <p class="amount"><%= convert(totalFollowers) %></p>
                 <p class="status">FOLLOWERS</p>
             </div>
             <div class="following">
-                <p class="amount"><%= convert(5000) %></p>
+                <% let totalFollowing = dataPost[0].Profile.following %>
+                <p class="amount"><%= convert(totalFollowing) %></p>
                 <p class="status">FOLLOWING</p>
             </div>
         </div>
@@ -75,12 +78,12 @@
 
     <div class="main-container">
         <h4>Feeds</h4>
-        <% dataPost.forEach(post => { %>
+        <% feed.forEach(feed => { %>
         <div class="card-post">
             <div class="account-post">
-                <img class="account-img" src="<%= post.Profile.imgProfile %>" alt="">
-                <p><%= post.username %></p>
-                <p class="timestamp"> <%= post.Profile.timeAgo%> </p>
+                <img class="account-img" src="<%= feed.Profile.imgProfile %>" alt="">
+                <p><%= feed.username %></p>
+                <p class="timestamp"> <%= feed.Profile.timeAgo%> </p>
             </div>
             <img src="/assets/scenery-post.jpg" alt="...">
             <div class="button">
@@ -99,7 +102,7 @@
             </div>
             <hr>
             <div class="caption">
-                <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p><%= %></p>
             </div>
             <div class="tags">
                 <a href="">#scenery</a>
