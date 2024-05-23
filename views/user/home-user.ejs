@@ -80,7 +80,7 @@
             <div class="account-post">
                 <img class="account-img" src="<%= post.Profile.imgProfile %>" alt="">
                 <p><%= post.username %></p>
-                <p class="timestamp"> <%= timeAgo(post.createdAt) %> </p>
+                <p class="timestamp"> <%= post.Profile.timeAgo%> </p>
             </div>
             <img src="/assets/scenery-post.jpg" alt="...">
             <div class="button">
