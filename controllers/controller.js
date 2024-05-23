@@ -31,9 +31,10 @@ class Controller {
             if (data) {
                 let passwordValidator = bcrypt.compareSync(password, data.password)
 
-                console.log(passwordValidator);
+                // console.log(passwordValidator);
                 
                 if (passwordValidator) {
+                    req.session.username = data.email
                     if (!data.displayName) {
                         return res.redirect(`/user/${data.id}/setting`)
                     } else {
