@@ -55,37 +55,28 @@
 
     <aside class="sidebar-right">
         <div class="popular-tags">
-            <h5>Popular Tags</h5>
+            <h5>Explore Tags</h5>
             <div class="tags">
-                <a href="">#scenery</a>
-                <a href="">#lake</a>
-                <a href="">#nature</a>
-                <a href="">#nature</a>
-                <a href="">#nature</a>
+            <% dataTags.forEach(tag => { %>
+                <a href=""><%= tag.name %></a>
+            <% }) %>
             </div>
         </div>
     </aside>
 
     <nav class="navbar-home">
         <h5>SocialSync</h5>
-        <form class="d-flex" role="search">
-            <button class="btn" type="submit">
-                <i class='bx bx-search' style='color:#7f7f7f'  ></i>
-            </button>
-            <input class="form-control" type="search" placeholder="Search" name="searchAccount">
-        </form>
     </nav>
 
     <div class="main-container">
         <h4>Feeds</h4>
-        <% dataPost.forEach(feed => { %>
         <div class="card-post">
             <div class="account-post">
-                <img class="account-img" src="<%= feed.Profile.imgProfile %>" alt="">
-                <p><%= feed.username %></p>
-                <p class="timestamp"> <%= feed.Profile.timeAgo%> </p>
+                <img class="account-img" src="<%= cardPosts[0].imgProfile %>" alt="">
+                <p><%= cardPosts[0].User.username %></p>
+                <p class="timestamp"> <%= cardPosts[0].timeAgo%> </p>
             </div>
-            <img src="/assets/scenery-post.jpg" alt="...">
+            <img src="<%= cardPosts[0].User.Posts[0].imgUrl %>" alt="...">
             <div class="button">
                 <div class="like">
                     <a href="">
@@ -102,15 +93,48 @@
             </div>
             <hr>
             <div class="caption">
-                <p><%= %></p>
-            </div>
-            <div class="tags">
-                <a href="">#scenery</a>
-                <a href="">#lake</a>
-                <a href="">#nature</a>
+                <p><%= cardPosts[0].User.Posts[0].title %></p>
+                <p><%= cardPosts[0].User.Posts[0].content %></p>
+                <div class="tags">
+                <% cardPosts[0].User.Posts[0].Post_Tags.map(tag => { %>
+                    <a href=""><%= tag.Tag.name %></a>
+                <% }) %>
+                </div>
             </div>
         </div>
-        <% }) %>
+
+        <div class="card-post">
+            <div class="account-post">
+                <img class="account-img" src="<%= cardPosts[1].imgProfile %>" alt="">
+                <p><%= cardPosts[1].User.username %></p>
+                <p class="timestamp"> <%= cardPosts[1].timeAgo%> </p>
+            </div>
+            <img src="<%= cardPosts[1].User.Posts[0].imgUrl %>" alt="...">
+            <div class="button">
+                <div class="like">
+                    <a href="">
+                        <i class='bx bx-heart' style='color:#313638'></i>
+                    </a>
+                    <p>111 likes</p>
+                </div>
+                <div class="comment">
+                    <a href="">
+                        <i class='bx bx-comment' style='color:#313638'  ></i>
+                    </a>
+                    <p>21 comments</p>
+                </div>
+            </div>
+            <hr>
+            <div class="caption">
+                <p><%= cardPosts[1].User.Posts[1].title %></p>
+                <p><%= cardPosts[1].User.Posts[1].content %></p>
+                <% cardPosts[1].User.Posts[1].Post_Tags.map(tag => { %>
+                    <div class="tags">
+                        <a href=""><%= tag.Tag.name %></a>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
     </div>
 
     <%- include("../_bootstrap") %>

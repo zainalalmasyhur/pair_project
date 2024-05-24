@@ -8,11 +8,11 @@ user.get("/:UserId/home", Controller.home);
 user.get("/:UserId/profile", Controller.showUserProfile);
 user.get("/:UserId/content/add", Controller.formAddContent);
 user.post("/:UserId/content/add", Controller.postNewContent);
-// user.get("/:UserId/setting/edit", Controller.formEditSetting);
-// user.post("/:UserId/setting/edit", Controller.postEditSetting);
-user.get("/:UserId/tags/:TagId", Controller.showTags);
-user.get("/:UserId/content/edit/:PostId", Controller.formEditContent);
-user.post("/:UserId/content/edit/:PostId", Controller.postEditedContent);
-user.get("/:UserId/content/delete/:PostId", Controller.deleteContent);
+user.get("/:UserId/setting/edit", Controller.formEditSetting);
+user.post("/:UserId/setting/edit", Controller.postEditSetting);
+user.get("/:UserId/content/:PostId", Controller.showDetailContent);
+user.get("/:UserId/content/:PostId/edit", Controller.formEditContent);
+user.post("/:UserId/content/:PostId/edit", Controller.postEditedContent);
+// user.get("/:UserId/content/:PostId/delete", Controller.deleteContent);
 
 module.exports = user;

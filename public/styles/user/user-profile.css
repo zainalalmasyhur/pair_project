@@ -95,7 +95,7 @@
     margin-right: 18%;
     padding: 32px 56px;
     width: 78%;
-    height: 100%;
+    height: 100vh;
     background-color: #fafafa;
 }
 
@@ -200,7 +200,6 @@
 
 .modal .modal-dialog .modal-body {
     padding: 0;
-    /* display: flex; */
 }
 
 .modal .modal-dialog .modal-body img {
@@ -225,5 +224,3 @@
     /* justify-content: center; */
     text-align: center;
 }
-
-/* test */

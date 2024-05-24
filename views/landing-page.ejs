@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= title %></title>
     <link rel="stylesheet" href="/styles/landing-page.css">
-
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
     <%- include("_navbar") %>
@@ -13,18 +13,29 @@
     <section id="home">
         <div class="container">
             <div class="headline">
-                <h1>Hello, world!</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nesciunt consectetur quod ab rem soluta facere.</p>
+                <h2 style="text-align: start;" class="mb-3">Connect, Share, and Discover</h2>
+                <p>Welcome to Your New Social Hub! Join a thriving community where you can share moments, meet new friends, and explore endless possibilities.</p>
             </div>
             <img src="/assets/social-media.jpg" alt="">
         </div>
     </section>
 
-    <section id="about">
+    <section id="features">
         <div class="container">
-            <div class="headline">
-                <h1>Lorem Ipsum</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias nesciunt consectetur quod ab rem soluta facere.</p>
+            <h2>Features</h2>
+            <div class="card-container">
+                <div class="card">
+                    <h6>Share Your Story with the World</h6>
+                    <p>Express your thoughts and photos with ease. Start creating your post now!</p>
+                </div>
+                <div class="card">
+                    <h6>Customizable Profiles</h6>
+                    <p>Create and customize your profile to reflect your unique personality and interests.</p>
+                </div>
+                <div class="card">
+                    <h6>Refine and Perfect Your Post</h6>
+                    <p>Edit your posts anytime to keep your content fresh and relevant.</p>
+                </div>
             </div>
         </div>
     </section>

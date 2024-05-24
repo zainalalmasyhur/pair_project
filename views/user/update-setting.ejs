@@ -6,26 +6,25 @@
     <title><%= title %></title>
     <link rel="stylesheet" href="/styles/user/create-content.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
 </head>
 <body>
     <aside class="sidebar">
         <div class="user-profile">
-            <img src="<%= dataUser.Profile.imgProfile %>" alt="">
-            <p class="display-name"><%= dataUser.Profile.displayName %></p>
-            <p class="username"><%= dataUser.username %></p>
+            <img src="<%= dataProfile.Profile.imgProfile %>" alt="">
+            <p class="display-name"><%= dataProfile.Profile.displayName %></p>
+            <p class="username"><%= dataProfile.username %></p>
         </div>
         <div class="statistics">
             <div class="posts">
-                <p class="amount"><%= dataUser.Profile.posts %></p>
+                <p class="amount"><%= dataProfile.Profile.posts %></p>
                 <p class="status">POSTS</p>
             </div>
             <div class="followers">
-                <p class="amount"><%= dataUser.Profile.followers %></p>
+                <p class="amount"><%= dataProfile.Profile.followers %></p>
                 <p class="status">FOLLOWERS</p>
             </div>
             <div class="following">
-                <p class="amount"><%= dataUser.Profile.following %></p>
+                <p class="amount"><%= dataProfile.Profile.following %></p>
                 <p class="status">FOLLOWING</p>
             </div>
         </div>
@@ -53,21 +52,25 @@
     <div class="main-container">
         <div class="container-left"></div>
         <div class="container-right">
-            <h3 class="mb-4">Update Post</h3>
-            <form method="post" action="/user/<%= UserId %>/content/<%= PostId %>/edit">
+            <h3 class="mb-4">Settings</h3>
+            <form method="post" action="/user/<%= UserId %>/setting/edit">
                 <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" value="<%= dataPost.title %>">
+                    <label for="imgProfile" class="form-label">Image URL</label>
+                    <input type="text" class="form-control" id="imgProfile" name="imgProfile" value="<%= dataProfile.Profile.imgProfile %>">
                 </div>
                 <div class="mb-3">
-                    <label for="content" class="form-label">Content</label>
-                    <textarea class="form-control" id="content" rows="3" name="content"><%= dataPost.content %></textarea>
+                    <label for="displayName" class="form-label">Display Name</label>
+                    <input type="text" class="form-control" id="displayName" name="displayName" value="<%= dataProfile.Profile.displayName %>">
                 </div>
                 <div class="mb-3">
-                    <label for="imgUrl" class="form-label">Image URL</label>
-                    <input type="text" class="form-control" id="imgUrl" name="imgUrl" value="<%= dataPost.imgUrl %>">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" value="<%= dataProfile.Profile.username %>">
                 </div>
-                <button type="submit" class="btn btn-primary w-100 mt-3">Update</button>
+                <div class="mb-3">
+                    <label for="bio" class="form-label">Bio</label>
+                    <textarea class="form-control" id="bio" rows="3" name="bio"><%= dataProfile.Profile.bio %></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-3">Save</button>
             </form>
         </div>
     </div>
