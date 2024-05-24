@@ -1,6 +1,6 @@
 const { User, Tag, Profile, Post, Post_Tag } = require("../models/index");
 const bcrypt = require('bcryptjs');
-const { Op } = require("sequelize");
+const { Op, where } = require("sequelize");
 const { convert, timeAgo } = require('../helpers/index')
 
 class Controller {
@@ -144,11 +144,16 @@ class Controller {
             let optionPosts = {
                 include: [
                     {
-                        model: Post,
+                        model: User,
                         include: [
                             {
-                                model: Post_Tag,
-                                include: [Tag]
+                                model: Post,
+                                include: [
+                                    {
+                                        model: Post_Tag,
+                                        include: [Tag]
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -164,15 +169,16 @@ class Controller {
             //     include: Post            
             // }
 
-            let postTags = await User.findAll(optionPosts);
+            let cardPosts = await Profile.findAll(optionPosts);
+            let dataTags = await Tag.findAll();
             // let postUser = await User.findAll({include})
             // let detailFeed = await User.findAll(optionPost)
             let feed = await User.findAll(optionFilter)
             let dataPost = await User.findAll(option);
 
-            res.send(postTags)
+            // res.send(cardPosts[0].User.Posts[0])
 
-            res.render("user/home-user", {title: "Home", dataPost, convert, timeAgo, UserId, feed, postTags});
+            res.render("user/home-user", {title: "Home", dataPost, convert, timeAgo, UserId, feed, cardPosts, dataTags});
 
         } catch (error) {
             res.send(error.message);
@@ -194,22 +200,16 @@ class Controller {
         }
     }
 
-    // --- Tags Page
-    static async showTags(req, res) {
-        try {
-            res.send("Halaman Tags")
-        } catch (error) {
-            res.send(error.message);
-        }
-    }
-
     // --- Create Post (User)
     static async formAddContent(req, res) {
         try {
             let { UserId, PostId } = req.params;
-            
+
+            let dataTags = await Tag.findAll();
             let dataUser = await User.findByPk(UserId, {include: Profile});
-            res.render("user/create-post", {title: "Create New Post", UserId, dataUser})
+
+            // res.send(dataTags)
+            res.render("user/create-post", {title: "Create New Post", UserId, dataUser, dataTags})
 
         } catch (error) {
             res.send(error.message);
@@ -219,10 +219,33 @@ class Controller {
     static async postNewContent(req, res) {
         try {
             let { UserId } = req.params;
-            let { title, content, imgUrl } = req.body;
+            let { title, content, imgUrl, TagId } = req.body;
 
-            await Post.create({ title, content, imgUrl, UserId, likes:0 });
+            let perTag = TagId.forEach(tag => {
+                return Number(tag);
+            })
+            // console.log(perTag);
+
+            await Post.create({ title, content, imgUrl, UserId });
+            await Post_Tag.create({ perTag });
+
             res.redirect(`/user/${UserId}/profile`);
+
+        } catch (error) {
+            res.send(error.message);
+        }
+    }
+
+    // --- Detail Post (User) 
+    static async showDetailContent(req, res) {
+        try {
+            let { UserId, PostId } = req.params;
+            
+            let dataUser = await User.findByPk(UserId, {include: Profile});
+            let dataPost = await Post.findByPk(PostId);
+            let dataTags = await Tag.findAll();
+
+            res.render("user/detail-content", {title: "Detail Post", UserId, PostId, dataPost, dataUser, dataTags});
 
         } catch (error) {
             res.send(error.message);
@@ -256,25 +279,54 @@ class Controller {
         }
     }
 
-    // --- Delete Post (User)
-    static async deleteContent(req, res) {
+    // --- Setting Profile
+    static async formEditSetting(req, res) {
         try {
-            let { UserId, PostId } = req.params;
-            
-            // console.log(req.query)
-            await Post_Tags.destroy({where: {PostId: PostId}});
-            res.redirect(`user/${UserId}/profile`)
-            // res.send("Delete Content")
+            let { UserId } = req.params;
+
+            let dataProfile = await User.findByPk(UserId, {include: Profile})
+
+            // res.send(dataProfile);
+            res.render("user/update-setting", {title: "Setting User", dataProfile, UserId});
         } catch (error) {
             res.send(error.message);
         }
     }
 
+    static async postEditSetting(req, res) {
+        try {
+            let { UserId } = req.params;
+            let { imgProfile, displayName, username, bio } = req.body;
+
+            await Profile.update({ imgProfile, displayName, username, bio }, {where: {UserId}});
+            res.redirect(`/user/${UserId}/profile`);
+
+        } catch (error) {
+            res.send(error.message);
+        }
+    }
+
+
+
+    // // --- Delete Post (User)
+    // static async deleteContent(req, res) {
+    //     try {
+    //         let { UserId, PostId } = req.params;
+            
+    //         // console.log(req.query)
+    //         await Post_Tags.destroy({where: {PostId: PostId}});
+    //         res.redirect(`user/${UserId}/profile`)
+    //         // res.send("Delete Content")
+    //     } catch (error) {
+    //         res.send(error.message);
+    //     }
+    // }
+
     // --- Admin Page
     static async showAdminPage(req, res) {
         try {
 
-            let {search} = req.query
+            let {search, deletedProfile} = req.query
 
             let option = {
                 include: Profile,
@@ -296,7 +348,7 @@ class Controller {
             // res.send(data)
 
             // res.send(data)
-            res.render("admin/home-admin",{title: "admin page",data,convert});
+            res.render("admin/home-admin",{title: "admin page",data,convert,deletedProfile});
         } catch (error) {
             res.send(error.message);
         }
@@ -307,13 +359,15 @@ class Controller {
         try {
             let {id} = req.params
 
-            await Profile.destroy({
-                where: {
-                    id: id
-                }
-            })
+            // let profile_user = await Profile.findByPk(id)
+            let profile_user = await Profile.findOne({where: {UserId: id}});
+            let name = profile_user.username;
 
-            res.redirect('/admin')
+            // res.send(name)
+            await profile_user.destroy()
+            res.redirect(`/admin?deletedProfile=${name}`);
+            
+            // res.redirect('/admin')
         } catch (error) {
             res.send(error.message);
         }

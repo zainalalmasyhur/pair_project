@@ -56,7 +56,7 @@
             <div class="profile-info">
                 <div class="setting">
                     <p class="display-name"><%= dataUser.Profile.displayName %></p>
-                    <a href="">
+                    <a href="/user/<%= UserId %>/setting/edit">
                         <i class='bx bx-cog'></i>    
                     </a>
                 </div>
@@ -77,22 +77,19 @@
             <a href="/user/<%= UserId %>/content/add">Create your first post</a>
         </div>
         <% } else { %>
-            <% dataPosts.Posts.forEach(post => { %>
             <div class="posts">
-                <a href="/user/<%= UserId %>/profile?content=<%= post.id %>" data-bs-toggle="modal" data-bs-target="#PostId">
-                    <img src="<%= post.imgUrl %>" alt="">
+                <% dataPosts.Posts.forEach(post => { %>
+                <a href="/user/<%= UserId %>/content/<%= post.id %>" style="display: flex; align-items: center;">
+                    <img src="<%= post.imgUrl %>" alt="" style="margin: 0;">
                 </a>
-                <div class="footer">
-                    <a type="button" href="/user/<%= UserId %>/content/delete/<%= post.id %>" class="btn btn-outline-danger" data-bs-dismiss="modal">Delete</a>
-                    <a type="button" href="/user/<%= UserId %>/content/edit/<%= post.id %>" class="btn btn-outline-warning">Edit</a>
-                </div>
-            <% })%>
+                <% })%>
+            </div>
         <% } %>
     </div>
 
 
     <!-- MODAL -->
-    <div class="modal fade" id="PostId" tabindex="-1" aria-hidden="true">
+    <!-- <div class="modal fade" id="PostId" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -114,12 +111,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a type="button" href="/user/<%= UserId %>/content/delete/" class="btn btn-outline-danger" data-bs-dismiss="modal">Delete</a>
+                    <a type="button" href="/user/:UserId/content/delete/" class="btn btn-outline-danger" data-bs-dismiss="modal">Delete</a>
                     <a type="button" class="btn btn-outline-warning">Edit</a>
                 </div>
             </div>
         </div>
-      </div>
+      </div> -->
 
     <%- include("../_bootstrap") %>
 </body>

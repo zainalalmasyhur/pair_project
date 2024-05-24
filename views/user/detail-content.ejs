@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= title %></title>
-    <link rel="stylesheet" href="/styles/user/create-content.css">
+    <link rel="stylesheet" href="/styles/user/detail-content.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 </head>
@@ -50,27 +50,48 @@
         </div>
     </aside>
 
-    <div class="main-container">
-        <div class="container-left"></div>
-        <div class="container-right">
-            <h3 class="mb-4">Update Post</h3>
-            <form method="post" action="/user/<%= UserId %>/content/<%= PostId %>/edit">
-                <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" value="<%= dataPost.title %>">
+    <div class="main-container" style="height: 100%;">
+        <div class="card-post" style="background-color: white; padding: 16px; border-radius: 8px;">
+            <div class="account-post">
+                <img class="account-img" src="<%= dataUser.Profile.imgProfile %>" alt="">
+                <p><%= dataUser.username %></p>
+                <p class="timestamp"> <%= dataUser.Profile.timeAgo%> </p>
+            </div>
+            <img src="<%= dataPost.imgUrl %>" alt="..." style="height: auto; width: 100%;">
+            <div class="button" style="align-items: center;">
+                <div class="like">
+                    <a href="">
+                        <i class='bx bx-heart' style='color:#313638'></i>
+                    </a>
+                    <p>101 likes</p>
                 </div>
-                <div class="mb-3">
-                    <label for="content" class="form-label">Content</label>
-                    <textarea class="form-control" id="content" rows="3" name="content"><%= dataPost.content %></textarea>
+                <div class="comment">
+                    <a href="">
+                        <i class='bx bx-comment' style='color:#313638'  ></i>
+                    </a>
+                    <p>20 comments</p>
                 </div>
-                <div class="mb-3">
-                    <label for="imgUrl" class="form-label">Image URL</label>
-                    <input type="text" class="form-control" id="imgUrl" name="imgUrl" value="<%= dataPost.imgUrl %>">
-                </div>
-                <button type="submit" class="btn btn-primary w-100 mt-3">Update</button>
-            </form>
-        </div>
+                <a href="/user/<%= dataUser.id %>/content/<%= dataPost.id %>/edit" class="btn btn-outline-warning ms-auto">Edit</a>
+            </div>
+            <hr>
+            <div class="caption">
+                <p><%= dataPost.title %></p>
+                <p><%= dataPost.content %></p>
+            </div>
+        </div>    
     </div>
+
+    <aside class="sidebar-right">
+        <div class="popular-tags">
+            <h5>Explore Tags</h5>
+            <div class="tags">
+            <% dataTags.forEach(tag => { %>
+                <a href=""><%= tag.name %></a>
+            <% }) %>
+            </div>
+        </div>
+    </aside>
+
 
     <%- include("../_bootstrap") %>
 </body>
